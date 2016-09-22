@@ -1,0 +1,41 @@
+
+
+<p>Peliculas list component</p>
+
+
+<p>Pelicula Favorita</p>
+<button (click)="onShowHide()" >Mostrar datos</button>
+<button (click)="onShowHide()" [class.showinData]="mostrarDatos===true">Mostrar datos 2</button>
+
+<button (click)="onHideShow(false)" [class.showinData]="mostrarDatos===false">Ocultar datos</button>
+
+
+<ul *ngIf="mostrarDatos === true">
+	<li>Pelicula: <strong>{{pelicula.titulo}}</strong></li>
+	<li>Director: <strong>{{pelicula.director}}</strong></li>
+	<li>Año: <strong>{{pelicula.anio}}</strong></li>
+</ul>
+
+<p>
+	Cambiar titulo:
+	<input type="text" (keypress)="debug()" [(ngModel)]="pelicula.titulo" />
+</p>
+
+<hr/>
+
+<p>Listado peliculas</p>
+
+<ul>
+	<ul *ngFor="#pelicula of peliculas" style="margin-bottom:20px;">
+		<li (click)="onCambiarPelicula(pelicula)"
+			class="pelicula-title" 
+			[class.clicked]="peliculaElegida.titulo == pelicula.titulo"
+			>Pelicula: <strong>{{pelicula.titulo}}</strong></li>
+		<li *ngIf="pelicula.director">Director: <strong>{{pelicula.director}}</strong></li>
+		<li *ngIf="pelicula.anio" >Año: <strong>{{pelicula.anio}}</strong></li>
+
+		<li><a [routerLink]="['CrearPeliculaBasadaEnOtra',
+		{titulo:pelicula.titulo, director:pelicula.director,
+		anio:pelicula.anio}]">Crear pelicula basada en esta</a></li>
+	</ul>
+</ul>
