@@ -2,21 +2,28 @@ import {Component} from "angular2/core";
 
 @Component({
 	selector: "mi-app",
-	
-	template: `<h1>{{titulo}}</h1>
-				<ul>
-					<li>pelicula: <strong>{{pelicula}}</strong></li>
-					<li>director: <strong>{{director}}</strong></li>
-					<li>año: <strong>{{anio}}</strong></li>
-				</ul>
-				`
+
+	templateUrl: "app/view/peliculas.html"
 })
 
 export class AppComponent  {
 	
-	public titulo:string = "Hola Lalo Angular 2"	;
-	public pelicula:string = "Sherk" ;
-	public director:string ="Lalo" ;
-	public anio:number = 2000 ;
+	public titulo:string ;
+	public pelicula:string ;
+	public director:string ;
+	public anio:number  ;
+
+	constructor() {
+		this.pelicula = "Batman";
+		this.director="Lalo";
+		this.anio=2016;
+		this.titulo="Hola Angular2";
+
+		//this.holaMundo();
+	}
+
+	holaMundo() {
+		alert('hola mundo: '+this.pelicula);
+	}
 
 }
