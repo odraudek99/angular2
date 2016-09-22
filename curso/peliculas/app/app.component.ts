@@ -1,4 +1,5 @@
 import {Component} from "angular2/core";
+import {Pelicula} from "./model/pelicula";
 
 @Component({
 	selector: "mi-app",
@@ -8,22 +9,21 @@ import {Component} from "angular2/core";
 
 export class AppComponent  {
 	
-	public titulo:string ;
-	public pelicula:string ;
-	public director:string ;
-	public anio:number  ;
+	public titulo:string = "Hola Peliculas Angular2";
+	
+	public pelicula:Pelicula;
 
 	constructor() {
-		this.pelicula = "Batman";
-		this.director="Lalo";
-		this.anio=2016;
-		this.titulo="Hola Angular2";
+		this.pelicula = new Pelicula(1,"Sherk","Lalo",2016);
+		
 
-		//this.holaMundo();
+		this.debug();
 	}
 
-	holaMundo() {
-		alert('hola mundo: '+this.pelicula);
+
+
+	debug() {
+		console.log(this.pelicula);
 	}
 
 }
