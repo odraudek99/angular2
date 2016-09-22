@@ -5,4 +5,11 @@ curso/peliculas/app/main.js
 curso/peliculas/app/main.js.map
 curso/peliculas/node_modules/
 curso/peliculas/typings/
-
+curso/peliculas/app/components/*.js
+curso/peliculas/app/components/*.js.map
+curso/peliculas/app/model/*.js
+curso/peliculas/app/model/*.js.map
+curso/peliculas/app/services/*.js
+curso/peliculas/app/services/*.js.map
+curso/peliculas/app/services/*.js
+curso/peliculas/app/services/*.js.map

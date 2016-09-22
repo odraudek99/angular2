@@ -1,7 +1,17 @@
 <h1>{{titulo}}</h1>
-<p>Peliculas</p>
-<ul>
-	<li>Pelicula: <strong>{{pelicula.titulo}}</strong></li>
-	<li>Director: <strong>{{pelicula.director}}</strong></li>
-	<li>Año: <strong>{{pelicula.anio}}</strong></li>
-</ul>
+
+<nav>
+	<ul>
+
+	<li><a [routerLink]="['Peliculas']">Inicio</a></li>
+	<li><a [routerLink]="['CrearPelicula']">Añadir pelicula</a></li>
+	<li><a [routerLink]="['Contacto']">Contacto</a></li>
+
+	</ul>
+
+</nav>
+
+<router-outlet></router-outlet>
+
+<peliculas-footer></peliculas-footer>
+
