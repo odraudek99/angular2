@@ -13,3 +13,9 @@ curso/peliculas/app/services/*.js
 curso/peliculas/app/services/*.js.map
 curso/peliculas/app/services/*.js
 curso/peliculas/app/services/*.js.map
+
+taller/restaurantes-backend/target
+taller/restaurantes-backend/.classpath
+taller/restaurantes-backend/.gitignore
+taller/restaurantes-backend/.project
+taller/restaurantes-backend/.settings
