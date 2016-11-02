@@ -8,6 +8,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import javax.servlet.ServletInputStream;
@@ -96,6 +97,34 @@ public class RestauranteController {
     }
 
 
+    @RequestMapping(value = "/random-restaurante")
+    public Respuesta book() {
+    	
+    	
+    	System.out.println("Recupera un restaurante random ");
+    	
+    	
+    	Iterable<Restaurante> res = restauranteRepository.findAll();
+    	
+    	restauranteRepository.count();
+    	
+    	int random = (int) (Math.random() * restauranteRepository.count()) + 1;
+    	
+    	
+    	
+    	Restaurante resp = restauranteRepository.findOne(random);
+    	Respuesta respuesta = new Respuesta();
+    	
+    	if (resp != null) {
+    		respuesta.setData(resp);
+        	respuesta.setStatus("success");
+    	}
+    	
+    	
+    	
+        return respuesta;
+    }
+    
     
     @RequestMapping(method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE, consumes={MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE})
     public Respuesta postRestaurante(@RequestBody Restaurante restaurante) {
