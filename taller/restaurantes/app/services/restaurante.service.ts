@@ -20,10 +20,19 @@ export class RestauranteService {
 	}
 
 
-	getRestaurante(id: string) {
-		return this._http.get(
+	getRestaurante(id: string, random=null) {
+
+		if (random== null) {
+			return this._http.get(
 			'http://localhost:8080/restaurantes/'+id)
+			.map(res => res.json());	
+		} else {
+			return this._http.get(
+			'http://localhost:8080/restaurantes/random-restaurante')
 			.map(res => res.json());
+		}
+
+		
 	}
 
 	addRestaurante(restaurante: Restaurante) {

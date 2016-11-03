@@ -27,6 +27,9 @@ export class RestauranteAddComponent implements OnInit  {
 	public errorMessage: string;
 	public status: string;
 
+
+	public filesToUpload: Array<File>;
+
 	constructor(private _routerParams:RouteParams,
 		private _restauranteService : RestauranteService,
 		private _router: Router) {
@@ -71,6 +74,55 @@ export class RestauranteAddComponent implements OnInit  {
 
 	callPrecio(value) {
 		this.restaurante.precio = value;
+	}
+
+
+	public resultUpload;
+	fileChangeEvent(fileInput: any) {
+
+		console.log('fileChangeEvent...');
+
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+
+		this.makeFileRequest("http://localhost:8080/restaurantes/upload-file/", [], this.filesToUpload)
+			.then((result)=>{
+				
+				console.log(result);
+				this.resultUpload=result;
+				this.restaurante.imagen = this.resultUpload.filename;
+				console.log(this.resultUpload.filename);
+			}, (error) => {
+				console.log(error);
+			});
+	}
+
+
+	makeFileRequest(url: string, params:Array<string>, files : Array<File>) {
+		
+		console.log('makeFileRequest...');
+
+		return new Promise((resolve, reject) => {
+
+			var formData:any = new FormData();
+			var xhr = new XMLHttpRequest();
+
+			for (var i = 0; i<files.length; i++) {
+				formData.append("uploads[]", files[i], files[i].name);
+			}
+
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			}
+
+			xhr.open("POST", url, true);
+			xhr.send(FormData);
+			});
 	}
 
 }

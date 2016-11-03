@@ -36,6 +36,10 @@ import {RestauranteEditComponent} from "./components/restaurante-edit.component"
 		path: '/edit-restaurante/:id', 
 		name:"EditarRestaurante", 
 		component: RestauranteEditComponent
+	}, {
+		path: '/donde-como-hoy/:random', 
+		name:"DondeComoHoy", 
+		component: RestaurantesDetailComponent
 	}
 ])
 

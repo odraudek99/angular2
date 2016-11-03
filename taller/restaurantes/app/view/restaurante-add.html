@@ -34,6 +34,13 @@
 	</select>
 </p>
 
+
+<label>Imagena:</label>
+<p>
+	<input type="file" placeholder="Subir imagen..." 
+	(change)="fileChangeEvent($event)"/>
+</p>
+
 <input type="submit" value="{{titulo}}"
  [disabled]="!formRestaurante.form.valid">
 
