@@ -44,7 +44,7 @@ export class RestauranteAddComponent implements OnInit  {
 					console.log('response: '+response);
 
 					this.status = response.status;
-
+					
 					console.log('this.status: '+this.status);
 
 					if (this.status !=="success") {
@@ -68,7 +68,7 @@ export class RestauranteAddComponent implements OnInit  {
 					this._routerParams.get("descripcion"),
 					null,
 					this._routerParams.get("precio"));
-
+		
 	}
 
 
@@ -84,9 +84,9 @@ export class RestauranteAddComponent implements OnInit  {
 
 		this.filesToUpload = <Array<File>>fileInput.target.files;
 
-		this.makeFileRequest("http://localhost:8080/restaurantes/upload-restaurante/1", [], this.filesToUpload)
+		this.makeFileRequest("http://localhost:8080/restaurantes/upload-file/", [], this.filesToUpload)
 			.then((result)=>{
-
+				
 				console.log(result);
 				this.resultUpload=result;
 				this.restaurante.imagen = this.resultUpload.filename;
@@ -98,7 +98,7 @@ export class RestauranteAddComponent implements OnInit  {
 
 
 	makeFileRequest(url: string, params:Array<string>, files : Array<File>) {
-
+		
 		console.log('makeFileRequest...');
 
 		return new Promise((resolve, reject) => {

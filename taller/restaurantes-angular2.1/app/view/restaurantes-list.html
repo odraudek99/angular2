@@ -4,29 +4,27 @@
 
 <li class="loading">
 	<img src="../../assets/images/loader.gif">
-	<img src="../../assets/images/loader2.gif"
+	<img src="../../assets/images/loader2.gif" 
 	*ngIf="loading2 == 'show'" >
 </li>
 
 
 
-	<li *ngFor="#restaurante of restaurantes"
+	<li *ngFor="#restaurante of restaurantes" 
 		class="restaurante-item">
 
-		<img class="imagen-rest-detail" width="200px"
-		src="http://localhost:8080/restaurantes/files/{{restaurante.id}}"
-			*ngIf="restaurante.imagen && restaurante.imagen !== 'null'"/>
+	<div class="image"></div>
 
 	<div class="data">
 		<h4>{{restaurante.nombre}}</h4>
 		<p>{{restaurante.direccion}}</p>
 		<p>
 			<a [routerLink]="['Restaurante',{id: restaurante.id}]" class="btn btn-ver">Ver</a>
-
+			
 			<a [routerLink]="['EditarRestaurante',{id: restaurante.id}]" class="btn btn-editar">Editar</a>
 
 			<a   (click)="onBorrarConfirm(restaurante.id)" class="btn btn-eliminar">Eliminar</a>
-
+			
 		</p>
 
 		<div class="seguro" *ngIf="confirmado===restaurante.id">

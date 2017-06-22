@@ -25,14 +25,14 @@ export class RestauranteService {
 		if (random== null) {
 			return this._http.get(
 			'http://localhost:8080/restaurantes/'+id)
-			.map(res => res.json());
+			.map(res => res.json());	
 		} else {
 			return this._http.get(
-			'http://localhost:8080/restaurantes/random-restaurante/')
+			'http://localhost:8080/restaurantes/random-restaurante')
 			.map(res => res.json());
 		}
 
-
+		
 	}
 
 	addRestaurante(restaurante: Restaurante) {
