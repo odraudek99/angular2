@@ -114,7 +114,7 @@ header h1 {
 .btn-eliminar {
 	background: #E23237;
 	border-color: #F54747;
-	
+
 }
 
 
@@ -136,7 +136,7 @@ header h1 {
 
 .restaurante-box .direccion {
 	color: gray;
-	
+
 }
 
 
@@ -187,4 +187,15 @@ nav ul li a:hover {
 	background: white;
 	padding: 10px;
 	margin-top: -45px;
+}
+
+
+.imagen-rest-detail {
+	width: :200px;
+	float: left;
+	margin-right: 30px;
+}
+
+.data-rest {
+	float: left;
 }

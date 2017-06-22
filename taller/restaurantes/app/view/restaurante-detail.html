@@ -1,4 +1,10 @@
-<div *ngIf="restaurante" class="restaurante-box"> 
+<div *ngIf="restaurante" class="restaurante-box">
+
+	<img class="imagen-rest-detail" width="200px" src="http://localhost:8080/restaurantes/uploads/{{restaurante.imagen}}"
+		*ngIf="restaurante.imagen && restaurante.imagen !== 'null'"/>
+
+<div class="data-rest">
+
 	<h1>Restaurante: {{restaurante.nombre}}</h1>
 	<p class="precio">
 		<span [ngSwitch]="restaurante.precio">
@@ -7,7 +13,8 @@
 			<span *ngSwitchWhen="'alto'">Más de 120</span>
 		</span>
 	</p>
-	
+
 	<p class="direccion">{{restaurante.direccion}}</p>
 	<p class="descripcion">{{restaurante.descripcion}}</p>
+</div>
 </div>

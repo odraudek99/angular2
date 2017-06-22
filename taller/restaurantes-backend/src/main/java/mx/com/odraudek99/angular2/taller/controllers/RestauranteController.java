@@ -110,7 +110,7 @@ public class RestauranteController {
     	
     	int random = (int) (Math.random() * restauranteRepository.count()) + 1;
     	
-    	
+    	System.out.println("random: "+random);
     	
     	Restaurante resp = restauranteRepository.findOne(random);
     	Respuesta respuesta = new Respuesta();
