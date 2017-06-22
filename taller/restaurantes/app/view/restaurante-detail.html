@@ -1,6 +1,7 @@
 <div *ngIf="restaurante" class="restaurante-box">
 
-	<img class="imagen-rest-detail" width="200px" src="http://localhost:8080/restaurantes/uploads/{{restaurante.imagen}}"
+	<img class="imagen-rest-detail" width="200px"
+	src="http://localhost:8080/restaurantes/files/{{restaurante.id}}"
 		*ngIf="restaurante.imagen && restaurante.imagen !== 'null'"/>
 
 <div class="data-rest">
