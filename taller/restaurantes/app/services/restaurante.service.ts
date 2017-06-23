@@ -6,6 +6,7 @@ import {Observable} from "rxjs/Observable";
 import {Restaurante} from "../model/restaurante";
 
 
+
 @Injectable()
 export class RestauranteService {
 
@@ -31,8 +32,6 @@ export class RestauranteService {
 			'http://localhost:8080/restaurantes/random-restaurante/')
 			.map(res => res.json());
 		}
-
-
 	}
 
 	addRestaurante(restaurante: Restaurante) {

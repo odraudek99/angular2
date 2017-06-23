@@ -1,5 +1,5 @@
 
-<header id="header"> 
+<header id="header">
 
 	<a [routerLink]="['Home']">
 		<img src="../../assets/images/angular.png" id="logo"/>
@@ -13,12 +13,13 @@
 	<ul>
 		<li><a [routerLink]="['Home']">Inicio</a></li>
 		<li><a [routerLink]="['CrearRestaurante']">Crear restaurante</a></li>
+		<li><a [routerLink]="['CrearRestaurante2']">Crear restaurante 2</a></li>
 		<li><a [routerLink]="['DondeComoHoy',{random:'true'}]">¿Dónde como hoy?</a></li>
 	</ul>
 </nav>
 
 <section class="main">
-	
+
 	<router-outlet></router-outlet>
 	<div class="clearfix"></div>
 </section>
