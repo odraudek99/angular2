@@ -41,7 +41,7 @@ public class RestauranteController {
     protected RestauranteRepository restauranteRepository;
 
     @RequestMapping
-    public Respuesta books2() {
+    public Respuesta findAll() {
     	Iterable<Restaurante> res = restauranteRepository.findAll();
     	Respuesta respuesta = new Respuesta();
     	respuesta.setData(res);
@@ -57,17 +57,9 @@ public class RestauranteController {
         return respuesta;
     }
 
-    @RequestMapping(value = "/new")
-    public Restaurante save() {
-    	System.out.println("new new");
-    	Restaurante restaurante = new Restaurante();
-    	System.out.println("new new");
-        return restauranteRepository.save(restaurante);
-    }
-    
 
     @RequestMapping(value = "/{id}")
-    public Respuesta book(@PathVariable("id") Integer id) {
+    public Respuesta findOne(@PathVariable("id") Integer id) {
     	System.out.println("Recupera un restaurante: "+id);
     	Restaurante res = restauranteRepository.findOne(id);
     	Respuesta respuesta = new Respuesta();
@@ -81,7 +73,7 @@ public class RestauranteController {
 
 
     @RequestMapping(value = "/random-restaurante")
-    public Respuesta book() {
+    public Respuesta findOneRandom() {
     	System.out.println("Recupera un restaurante random ");
     	Iterable<Restaurante> res = restauranteRepository.findAll();    	
     	restauranteRepository.count();
@@ -98,7 +90,7 @@ public class RestauranteController {
     
     
     @RequestMapping(value="/delete-restaurante/{id}", method = RequestMethod.GET)
-    public Respuesta deleteRestaurante(@PathVariable("id") Integer id) {
+    public Respuesta delete(@PathVariable("id") Integer id) {
 
     	System.out.println("Entra a: delete-restaurante: id: "+id );
     	restauranteRepository.delete(id);
@@ -110,36 +102,9 @@ public class RestauranteController {
     
 
     
-    @PostMapping("/upload") // //new annotation since 4.3
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
-
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
-        }
-
-        try {
-
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get("/tmp/" + file.getOriginalFilename());
-            Files.write(path, bytes);
-
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "redirect:/uploadStatus";
-    }
-
-    
     @RequestMapping(method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE, 
     		consumes={MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE})
-    public Respuesta postRestauranteImagen(@RequestBody Restaurante restaurante) {
+    public Respuesta save(@RequestBody Restaurante restaurante) {
 
     	System.out.println("Entra a restaurante post: "+restaurante.toString());
     	restaurante.setId(id++);
@@ -153,7 +118,7 @@ public class RestauranteController {
     
     @RequestMapping(value="/update-restaurante/{id}", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE,
     		consumes={MediaType.APPLICATION_FORM_URLENCODED_VALUE,MediaType.APPLICATION_JSON_VALUE})
-    public Respuesta postRestaurante(@PathVariable("id") String id, @RequestBody Restaurante restaurante) {
+    public Respuesta updateOne(@PathVariable("id") String id, @RequestBody Restaurante restaurante) {
     	
     	System.out.println("Entra a: update-restaurante: id: "+id + " Restaurante: "+restaurante);
     	Restaurante res = restauranteRepository.save(restaurante);
@@ -161,24 +126,12 @@ public class RestauranteController {
    		respuesta.setStatus("success");
    		respuesta.setData(res);
    		return respuesta;
-       
     }
-    
-    
-    @RequestMapping(value = "/solicitarsaldo", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<String> solicitarSaldo(
-            @RequestParam(value = "usuario", required = true) String usuario,
-            
-            @RequestParam(value = "comentario") String comentario,
-            @RequestParam(value = "file") MultipartFile file) {
-
-    	return null;
-    }
+ 
     
     @RequestMapping(value = "/file21",method = RequestMethod.POST, consumes = "multipart/form-data")
     @ResponseBody
-    public Respuesta addUser(@RequestPart("file[]") MultipartFile[] upload, @RequestPart("restaurante") Restaurante restaurante){
+    public Respuesta saveOneWithFile(@RequestPart("file[]") MultipartFile[] upload, @RequestPart("restaurante") Restaurante restaurante){
     	try {    		
             if (upload == null || upload.length == 0) {
                 return null;//throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
@@ -202,37 +155,10 @@ public class RestauranteController {
   		return respuesta;
     }
     
-    /*
-     * Actualiza datos del restaurante, sirve desde postman solo subir imagen
-     */
-    @RequestMapping(value="/update-restaurante21/", method = RequestMethod.POST)
-    public Respuesta handleFileUpload(
-    		
-    		@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
-
-    	try {
-    		
-            if (file.isEmpty()) {
-                return null;//throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
-            }
-            Path rootLocation = Paths.get("/tmp/");
-            Files.copy(file.getInputStream(),
-            		rootLocation.resolve(file.getOriginalFilename()));
-        } catch (IOException e) {
-        	return null;//throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
-        }
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
-        Respuesta respuesta = new Respuesta();
-  		respuesta.setStatus("success");
-  		
-  		return respuesta;
-    }
     
 
     @RequestMapping(value="/update-restaurante2/{id}", method = RequestMethod.POST)
-    public Respuesta handleFileUpload22(@PathVariable("id") String id,
+    public Respuesta saveOneWithFileTest1(@PathVariable("id") String id,
     		@RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes) {
 
@@ -259,7 +185,7 @@ public class RestauranteController {
      */
     @RequestMapping(value = "/files/{id}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable Integer id) {
+    public ResponseEntity<Resource> findImage(@PathVariable Integer id) {
     	System.out.println("id::: "+id);
 
     	Restaurante res = restauranteRepository.findOne(id);
@@ -272,7 +198,7 @@ public class RestauranteController {
                 .body(file);
     }
     
-    public Resource loadAsResource(String filename) {
+    private Resource loadAsResource(String filename) {
         try {
         	
         	System.out.println("filename::: "+filename);
@@ -292,5 +218,31 @@ public class RestauranteController {
         }
     }
     
+    
+    @PostMapping("/upload") // //new annotation since 4.3
+    public String singleFileUpload(@RequestParam("file") MultipartFile file,
+                                   RedirectAttributes redirectAttributes) {
+
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return "redirect:uploadStatus";
+        }
+
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("/tmp/" + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            redirectAttributes.addFlashAttribute("message",
+                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/uploadStatus";
+    }
 
 }
