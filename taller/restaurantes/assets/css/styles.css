@@ -61,8 +61,8 @@ header h1 {
 	border-top: 1px solid #ddd;
 	height: 100px;
 	float: left;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 40px;
 	color: gray;
 
 }
@@ -192,7 +192,7 @@ nav ul li a:hover {
 
 .imagen-rest-detail {
 	width: :200px;
-	
+
 	float: left;
 	margin-right: 30px;
 }
